@@ -1,8 +1,10 @@
-import { View, Text, Image, Pressable, TouchableOpacity } from 'react-native'
+import { View, Text, Image, Pressable, TouchableOpacity, ScrollView } from 'react-native'
 import React, { useLayoutEffect } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ChevronDownIcon, UserIcon, MagnifyingGlassIcon, AdjustmentsVerticalIcon, Cog6ToothIcon } from "react-native-heroicons/outline";
+import Calendario from '../components/Calendario';
+
 
 const HomeScreen = () => {
 
@@ -33,6 +35,8 @@ const HomeScreen = () => {
                    <Cog6ToothIcon color="white" />
             </TouchableOpacity>
         </View>
+        {/* opções de menu */}
+        <Calendario />
     </SafeAreaView>
   )
 }
