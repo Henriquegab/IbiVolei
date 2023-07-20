@@ -8,6 +8,9 @@ module.exports = {
   ],
   theme: {
     extend: {},
+    colors: {
+      'ibiLaranja': '#ff5f01',
+    },
   },
   plugins: [],
 }

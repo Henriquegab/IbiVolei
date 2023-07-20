@@ -3,7 +3,7 @@ import React, { useLayoutEffect } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ChevronDownIcon, UserIcon, MagnifyingGlassIcon, AdjustmentsVerticalIcon, Cog6ToothIcon } from "react-native-heroicons/outline";
-import Calendario from '../components/Calendario';
+import Calendario from '../components/Calendario.js';
 
 
 const HomeScreen = () => {
@@ -17,7 +17,7 @@ const HomeScreen = () => {
     }, []);
 
   return (
-    <SafeAreaView className="bg-[#ff5f01] pt-3">
+    <SafeAreaView className="bg-[#ff5f01] pt-2">
         {/* header */}
         <View className="flex-row items-center mx-4 space-x-2">
             <Image 
