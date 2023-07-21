@@ -18,8 +18,8 @@ const Dia = ({ diaSemana, dia, foiClicado, handleCliqueDia }) => {
     : 'font-bold text-lg text-white';
 
     const styles = foiClicado
-    ? 'space-x-2 px-5 rounded-full flex items-center flex-nowrap bg-red-500'
-    : 'space-x-2 px-5 rounded-full flex items-center flex-nowrap bg-white';
+    ? 'space-x-2 px-5 rounded-full flex items-center flex-nowrap bg-white'
+    : 'space-x-2 px-5 rounded-full flex items-center flex-nowrap';
 
   return (
     <TouchableOpacity onPress={handleClique} className={styles}>

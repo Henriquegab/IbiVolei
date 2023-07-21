@@ -1,20 +1,66 @@
-import { View, Text, Image, Pressable, TouchableOpacity, ScrollView } from 'react-native'
-import React, { useLayoutEffect } from 'react'
+import { View, Text, Image, Pressable, TouchableOpacity, ScrollView, ActivityIndicator, StyleSheet } from 'react-native'
+import React, { useLayoutEffect, useState, useEffect } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ChevronDownIcon, UserIcon, MagnifyingGlassIcon, AdjustmentsVerticalIcon, Cog6ToothIcon } from "react-native-heroicons/outline";
 import Calendario from '../components/Calendario.js';
+import apiUrl from '../config.js';
+import axios, { AxiosError } from 'axios';
+import {AsyncStorage} from 'react-native';
 
 
 const HomeScreen = () => {
 
     const navigation = useNavigation();
 
+    const [agendamentos, setAgendamentos] = useState([]);
+
+    const [loading, setLoading] = useState(true); // Estado de carregamento
+
     useLayoutEffect(() => {
         navigation.setOptions({
             headerShown: false,
         });
     }, []);
+
+
+    useEffect(() => {
+        // Faz a solicitação à API para obter os nomes
+  
+      
+        const fetchData = async () => {
+  
+          try{
+            //   const token = await AsyncStorage.getItem('token');
+            //   if (token) {
+                  const response = await axios.get(`${apiUrl}/api/agendamento`);
+        
+                  setAgendamentos(response.data.data); // Atualiza o estado com os nomes obtidos da API
+                // }
+                // alert(response.data.data);
+              
+          }
+          catch(error){
+              console.log(error)
+          }
+          finally {
+            setLoading(false); // Altera o estado de carregamento para false após a resposta da API
+          }
+          
+        }
+  
+        
+          fetchData();
+      }, []);
+
+      if (loading) {
+        // Exibe um indicador de carregamento enquanto espera a resposta da API
+        return (
+          <View className="flex-1 justify-center items-center">
+            <ActivityIndicator size="large" color="orange" />
+          </View>
+        );
+      }
 
   return (
     <SafeAreaView className="bg-[#ff5f01] pt-2">
@@ -35,10 +81,12 @@ const HomeScreen = () => {
                    <Cog6ToothIcon color="white" />
             </TouchableOpacity>
         </View>
-        {/* opções de menu */}
+        {/* calendário */}
         <Calendario />
     </SafeAreaView>
   )
 }
+
+
 
 export default HomeScreen

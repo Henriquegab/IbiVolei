@@ -7,10 +7,12 @@ module.exports = {
     "./components/**/*.{js,jsx,ts,tsx}"
   ],
   theme: {
-    extend: {},
-    colors: {
-      'ibiLaranja': '#ff5f01',
+    extend: {
+      colors: {
+        'ibiLaranja': '#ff5f01',
+      },
     },
+    
   },
   plugins: [],
 }
