@@ -20,6 +20,8 @@ const HomeScreen = () => {
 
     const [agendamentosSemana, setAgendamentosSemana] = useState([]);
 
+    const [diaSelecionado, setDiaSelecionado] = useState(0);
+
     useLayoutEffect(() => {
         navigation.setOptions({
             headerShown: false,
@@ -56,6 +58,11 @@ const HomeScreen = () => {
           fetchData();
       }, []);
 
+      const handleDiaSelecionado = (index) => {
+        // Atualiza o estado com o índice do dia selecionado
+        setDiaSelecionado(index);
+      };
+
       if (loading) {
         // Exibe um indicador de carregamento enquanto espera a resposta da API
         return (
@@ -86,22 +93,26 @@ const HomeScreen = () => {
                 </TouchableOpacity>
             </View>
             {/* calendário */}
-            <Calendario />
+            <Calendario onDiaSelecionado={handleDiaSelecionado} />
             {/* horarios */}
             
         </SafeAreaView>
         
-        <ScrollView style={{ paddingTop: 5, paddingHorizontal: 4, marginBottom: 10, paddingBottom: 5 }}>
-        {/* Renderizar os componentes Horario para cada dia */}
-        {agendamentosSemana.map((agendamentosDia, index) => (
-          <View key={index} style={{ paddingBottom: 24 }}>
-            {Object.entries(agendamentosDia).map(([hora, agendamento]) => (
-              <Horario key={hora} hora={hora} nome={agendamento && agendamento.nome} />
+        {agendamentosSemana.length > 0 && diaSelecionado >= 0 && (
+          // Renderiza os componentes de horários apenas se houver agendamentos e o dia selecionado for válido
+          <ScrollView className="pt-5 px-4 mb-10 pb-5">
+            {/* Renderizar os componentes Horario para o dia selecionado */}
+            {Object.entries(agendamentosSemana[diaSelecionado]).map(([hora, agendamento]) => (
+              <View key={hora} className="flex">
+                {agendamento ? (
+                  <Horario key={agendamento.id} hora={hora} nome={agendamento.nome} />
+                ) : (
+                  <Horario key={hora} hora={hora} /> // Passa o componente sem nome caso agendamento seja nulo
+                )}
+              </View>
             ))}
-          </View>
-        ))}
-      </ScrollView>
-        
+          </ScrollView>
+        )}
         
         
     </>

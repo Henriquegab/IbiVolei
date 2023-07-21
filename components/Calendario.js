@@ -3,10 +3,18 @@ import { View, Text, ScrollView } from 'react-native';
 import Dia from './Dia.js';
 import moment from 'moment';
 
-const Calendario = () => {
+const Calendario = ({ onDiaSelecionado }) => {
   const dataAtual = moment();
   const diaDaSemanaAtual = dataAtual.day();
   const siglasDiasDaSemana = ['DOM', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SAB'];
+
+  const [diaSelecionado, setDiaSelecionado] = useState(0);
+
+
+  const handleDiaClick = (index) => {
+    // Chama a função onDiaSelecionado passando o índice do dia selecionado
+    onDiaSelecionado(index);
+  };
 
   // Estado para armazenar os cliques nos dias
   const [diasClicados, setDiasClicados] = useState(Array(7).fill(false));
@@ -20,6 +28,12 @@ const Calendario = () => {
 
     // Atualize o estado de todos os dias
     setDiasClicados(novosDiasClicados);
+
+      // Atualiza o estado do dia selecionado
+    setDiaSelecionado(index);
+
+    // Chama a função onDiaSelecionado passando o índice do dia selecionado
+    onDiaSelecionado(index);
   };
 
   // Array para armazenar os botões com os dias da semana
