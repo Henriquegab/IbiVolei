@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import Dia from './Dia.js';
 import moment from 'moment';
+import 'moment/locale/pt-br'; // Importe o idioma desejado para o Moment
+moment.locale('pt-br'); // Defina o idioma como português
 
 const Calendario = ({ onDiaSelecionado }) => {
   const dataAtual = moment();
@@ -42,18 +44,19 @@ const Calendario = ({ onDiaSelecionado }) => {
   // Gerar os botões com os dias da semana
   for (let i = 0; i < 7; i++) {
     // Calcular o dia correspondente para o botão atual
-    const dia = dataAtual.date() + i;
+    const dia = dataAtual.clone().add(i, 'day');
+    const diaDoMes = dia.date();
+    const mes = dia.month(); // 0 para janeiro, 1 para fevereiro, etc.
 
     // Obter o índice do dia da semana correspondente ao botão atual
-    const diaDaSemanaIndex = (diaDaSemanaAtual + i) % 7;
-
     // Adicionar o botão com as informações ao array
     botoesDiasDaSemana.push(
       <Dia
         key={i}
-        diaSemana={siglasDiasDaSemana[diaDaSemanaIndex]}
-        dia={dia}
+        diaSemana={siglasDiasDaSemana[dia.day()]}
+        dia={diaDoMes}
         foiClicado={diasClicados[i]}
+        diaAtual={dia.isSame(moment(), 'day')} // Verifica se é o dia atual
         handleCliqueDia={() => handleCliqueDia(i)}
       />
     );

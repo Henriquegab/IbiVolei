@@ -2,12 +2,13 @@ import { View, Text, Image, Pressable, TouchableOpacity, ScrollView, ActivityInd
 import React, { useLayoutEffect, useState, useEffect } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { SafeAreaFrameContext, SafeAreaView } from 'react-native-safe-area-context';
-import { ChevronDownIcon, UserIcon, MagnifyingGlassIcon, AdjustmentsVerticalIcon, Cog6ToothIcon } from "react-native-heroicons/outline";
+import { ChevronDownIcon, UserIcon, MagnifyingGlassIcon, AdjustmentsVerticalIcon, Cog6ToothIcon, PlusIcon } from "react-native-heroicons/outline";
 import Calendario from '../components/Calendario.js';
 import apiUrl from '../config.js';
 import axios, { AxiosError } from 'axios';
 import {AsyncStorage} from 'react-native';
 import Horario from '../components/Horario.js';
+import Header from '../components/Header.js';
 
 
 const HomeScreen = () => {
@@ -56,6 +57,7 @@ const HomeScreen = () => {
   
         
           fetchData();
+          setDiaSelecionado(0);
       }, []);
 
       const handleDiaSelecionado = (index) => {
@@ -72,26 +74,14 @@ const HomeScreen = () => {
         );
       }
 
+      const TelaAgendarQuadra = () => {
+        navigation.navigate('AgendarQuadra');
+      }
+
   return (
     <>
         <SafeAreaView className="bg-[#ff5f01] pt-2">
-            {/* header */}
-            <View className="flex-row items-center mx-4 space-x-2">
-                <Image 
-                source={{ uri: 'https://d1fdloi71mui9q.cloudfront.net/WHqB4urTRBKD9xPsZjNF_JZepFm5JgDWe5SOt' }}
-                className="h-4 w-10 rounded-full"
-                />
-                <View className="flex-1">
-                
-                    <Text className="font-bold text-xl text-white">Agenda</Text>
-                </View>
-                <View className="flex-1">
-                    <Text className="self-end font-bold text-md text-gray-100">Olá, Henrique</Text>
-                </View>
-                <TouchableOpacity className="">
-                    <Cog6ToothIcon color="white" />
-                </TouchableOpacity>
-            </View>
+            <Header />
             {/* calendário */}
             <Calendario onDiaSelecionado={handleDiaSelecionado} />
             {/* horarios */}
@@ -100,18 +90,32 @@ const HomeScreen = () => {
         
         {agendamentosSemana.length > 0 && diaSelecionado >= 0 && (
           // Renderiza os componentes de horários apenas se houver agendamentos e o dia selecionado for válido
-          <ScrollView className="pt-5 px-4 mb-10 pb-5">
-            {/* Renderizar os componentes Horario para o dia selecionado */}
-            {Object.entries(agendamentosSemana[diaSelecionado]).map(([hora, agendamento]) => (
-              <View key={hora} className="flex">
-                {agendamento ? (
-                  <Horario key={agendamento.id} hora={hora} nome={agendamento.nome} />
-                ) : (
-                  <Horario key={hora} hora={hora} /> // Passa o componente sem nome caso agendamento seja nulo
-                )}
-              </View>
-            ))}
-          </ScrollView>
+          <View className="flex-1">
+            <ScrollView className="pt-5 px-4 mb-10 pb-5">
+              {/* Renderizar os componentes Horario para o dia selecionado */}
+              {Object.entries(agendamentosSemana[diaSelecionado]).map(([hora, agendamento]) => (
+                <View key={hora} className="flex">
+                  {agendamento ? (
+                    <Horario key={agendamento.id} hora={hora} nome={agendamento.nome} />
+                  ) : ''}
+                </View>
+              ))}
+            </ScrollView>
+            {/* Botão fixo */}
+          <TouchableOpacity
+            className="bg-white border-solid border-2 border-ibiLaranja"
+            style={{
+              position: 'absolute',
+              bottom: 90,
+              right: 30,
+              padding: 10,
+              borderRadius: 40,
+            }}
+            onPress={TelaAgendarQuadra}
+          >
+            <PlusIcon size="40" color="#ff5f01"/>
+          </TouchableOpacity>
+          </View>
         )}
         
         
