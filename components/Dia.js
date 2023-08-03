@@ -6,7 +6,7 @@ const Dia = ({ diaSemana, dia, foiClicado, handleCliqueDia }) => {
     // Atualize o estado de todos os dias para "false" antes de atualizar o estado do dia clicado para "true"
     handleCliqueDia();
   };
-
+  
   
 
   const textSemana = foiClicado

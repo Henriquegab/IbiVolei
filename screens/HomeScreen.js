@@ -44,12 +44,14 @@ const HomeScreen = () => {
                   setAgendamentosSemana(response.data.data); // Atualiza o estado com os nomes obtidos da API
                 // }
                 // alert(response.data.data);
+                
               
           }
           catch(error){
               console.log(error)
           }
           finally {
+            
             setLoading(false); // Altera o estado de carregamento para false após a resposta da API
           }
           
@@ -57,7 +59,8 @@ const HomeScreen = () => {
   
         
           fetchData();
-          setDiaSelecionado(0);
+
+          
       }, []);
 
       const handleDiaSelecionado = (index) => {
@@ -102,7 +105,7 @@ const HomeScreen = () => {
               ))}
             </ScrollView>
             {/* Botão fixo */}
-          <TouchableOpacity
+          {/* <TouchableOpacity
             className="bg-white border-solid border-2 border-ibiLaranja"
             style={{
               position: 'absolute',
@@ -114,7 +117,7 @@ const HomeScreen = () => {
             onPress={TelaAgendarQuadra}
           >
             <PlusIcon size="40" color="#ff5f01"/>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           </View>
         )}
         

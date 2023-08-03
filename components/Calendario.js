@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import Dia from './Dia.js';
 import moment from 'moment';
@@ -37,6 +37,10 @@ const Calendario = ({ onDiaSelecionado }) => {
     // Chama a função onDiaSelecionado passando o índice do dia selecionado
     onDiaSelecionado(index);
   };
+
+  useEffect(() => {
+    handleCliqueDia(0);
+  }, []);
 
   // Array para armazenar os botões com os dias da semana
   const botoesDiasDaSemana = [];
