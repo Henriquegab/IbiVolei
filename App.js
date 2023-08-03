@@ -39,7 +39,7 @@ export default function App() {
         options={{
           tabBarIcon: ({ color, size }) => (
             
-            color === 'white' ? <HomeIcon color="white" /> : <OutlineHomeIcon color="white" />
+            color === 'white' ? <HomeIcon color="white" size={28} /> : <OutlineHomeIcon color="white" size={28} />
           ),
         }}
         
@@ -47,7 +47,7 @@ export default function App() {
         <Tab.Screen name="Agendar Quadra" component={AgendarQuadra} 
           options={{
             tabBarIcon: ({ color, size }) => (
-              color === 'white' ? <SquaresPlusIcon color="white" /> : <OutlineSquaresPlusIcon color="white" />
+              color === 'white' ? <SquaresPlusIcon color="white" size={28} /> : <OutlineSquaresPlusIcon color="white" size={28} />
               
             ),
           }}
@@ -55,7 +55,7 @@ export default function App() {
         <Tab.Screen name="Grupos" component={Grupos} 
           options={{
             tabBarIcon: ({ color, size }) => (
-              color === 'white' ? <UsersIcon color="white" /> : <OutlineUsersIcon color="white" />
+              color === 'white' ? <UsersIcon color="white" size={28} /> : <OutlineUsersIcon color="white" size={28} />
               
             ),
           }}
@@ -63,7 +63,7 @@ export default function App() {
         <Tab.Screen name="Opções" component={Options} 
           options={{
             tabBarIcon: ({ color, size }) => (
-              color === 'white' ? <Cog8ToothIcon color="white" /> : <OutlineCog8ToothIcon color="white" />
+              color === 'white' ? <Cog8ToothIcon color="white" size={28} /> : <OutlineCog8ToothIcon color="white" size={28} />
               
             ),
           }}
