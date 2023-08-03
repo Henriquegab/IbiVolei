@@ -9,6 +9,7 @@ import axios, { AxiosError } from 'axios';
 import {AsyncStorage} from 'react-native';
 import Horario from '../components/Horario.js';
 import Header from '../components/Header.js';
+import Toast from 'react-native-root-toast'
 
 
 const HomeScreen = () => {
@@ -22,6 +23,10 @@ const HomeScreen = () => {
     const [agendamentosSemana, setAgendamentosSemana] = useState([]);
 
     const [diaSelecionado, setDiaSelecionado] = useState(0);
+
+    
+
+    
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -40,15 +45,20 @@ const HomeScreen = () => {
             //   const token = await AsyncStorage.getItem('token');
             //   if (token) {
                   const response = await axios.get(`${apiUrl}/api/agendamento`);
+
+                  
         
                   setAgendamentosSemana(response.data.data); // Atualiza o estado com os nomes obtidos da API
                 // }
                 // alert(response.data.data);
                 
-              
+            
           }
           catch(error){
               console.log(error)
+              let toast = Toast.show('Requisição não concluida!', {
+                duration: Toast.durations.LONG,
+              });
           }
           finally {
             
@@ -82,6 +92,8 @@ const HomeScreen = () => {
       }
 
       const containerStyle = Platform.OS === 'android' ? 'bg-[#ff5f01] pt-2 pb-5' : 'bg-[#ff5f01] pt-2';
+
+      
 
   return (
     <>

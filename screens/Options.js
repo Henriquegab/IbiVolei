@@ -1,7 +1,8 @@
-import { View, Text, SafeAreaView } from 'react-native'
+import { View, Text, SafeAreaView, Image } from 'react-native'
 import React, { useLayoutEffect } from 'react'
 import Header from '../components/Header'
 import { useNavigation } from '@react-navigation/native'
+import luis from '../assets/luis.png'
 
 const Options = () => {
 
@@ -28,10 +29,15 @@ const Options = () => {
   return (
     <>
         <SafeAreaView className="bg-[#ff5f01] pt-6">
-                {/* <Header /> */}
+                
                 
                 
         </SafeAreaView>
+        <View className="flex items-center justify-center">
+            <Image  source={luis}></Image>
+        </View>
+
+        
     </>
     
   )
