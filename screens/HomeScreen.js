@@ -1,4 +1,4 @@
-import { View, Text, Image, Pressable, TouchableOpacity, ScrollView, ActivityIndicator, StyleSheet } from 'react-native'
+import { View, Text, Image, Pressable, TouchableOpacity, ScrollView, ActivityIndicator, StyleSheet, Platform  } from 'react-native'
 import React, { useLayoutEffect, useState, useEffect } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { SafeAreaFrameContext, SafeAreaView } from 'react-native-safe-area-context';
@@ -81,9 +81,11 @@ const HomeScreen = () => {
         navigation.navigate('AgendarQuadra');
       }
 
+      const containerStyle = Platform.OS === 'android' ? 'bg-[#ff5f01] pt-2 pb-5' : 'bg-[#ff5f01] pt-2';
+
   return (
     <>
-        <SafeAreaView className="bg-[#ff5f01] pt-2">
+        <SafeAreaView className={containerStyle}>
             <Header />
             {/* calendário */}
             <Calendario onDiaSelecionado={handleDiaSelecionado} />
@@ -93,8 +95,8 @@ const HomeScreen = () => {
         
         {agendamentosSemana.length > 0 && diaSelecionado >= 0 && (
           // Renderiza os componentes de horários apenas se houver agendamentos e o dia selecionado for válido
-          <View className="flex-1">
-            <ScrollView className="pt-5 px-4 mb-10 pb-5">
+          <View className="flex-1 ">
+            <ScrollView className="py-5 px-4 pb-5">
               {/* Renderizar os componentes Horario para o dia selecionado */}
               {Object.entries(agendamentosSemana[diaSelecionado]).map(([hora, agendamento]) => (
                 <View key={hora} className="flex">

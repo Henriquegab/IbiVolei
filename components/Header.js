@@ -17,9 +17,9 @@ const Header = () => {
     <View className="flex-1">
         <Text className="self-end font-bold text-md text-gray-100">Olá, Henrique</Text>
     </View>
-    <TouchableOpacity className="">
+    {/* <TouchableOpacity className="">
         <Cog6ToothIcon color="white" />
-    </TouchableOpacity>
+    </TouchableOpacity> */}
 </View>
   )
 }
