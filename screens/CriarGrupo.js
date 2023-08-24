@@ -1,6 +1,6 @@
 import { View, Keyboard, TouchableWithoutFeedback, KeyboardAvoidingView  } from 'react-native'
 import React, {useState} from 'react'
-import { TextInput, Switch, Text, Button } from 'react-native-paper';
+import { TextInput, Switch, Text, Button, Modal, Portal } from 'react-native-paper';
 
 const CriarGrupo = () => {
 
@@ -14,8 +14,13 @@ const CriarGrupo = () => {
     };
 
     const handlePost = () => {
-        
+
     }
+
+    const showModal = () => setVisible(true);
+    const hideModal = () => setVisible(false);
+    const [visible, setVisible] = useState(false);
+    const containerStyle = {backgroundColor: 'white', padding: 20};
 
 
 
@@ -41,8 +46,13 @@ const CriarGrupo = () => {
                         <Text variant="titleMedium">Grupo privado</Text>
                             <Switch value={isSwitchOn} onValueChange={onToggleSwitch} />
                     </View>
+                    <Portal>
+                        <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
+                        <Text>Tem certeza que quer criar um grupo com esse nome?</Text>
+                        </Modal>
+                    </Portal>
                     <View className="items-center pt-6">
-                        <Button className="w-36 h-12 justify-center" icon="content-save-all" mode="contained" onPress={handlePost} buttonColor="#ff5f01">
+                        <Button className="w-36 h-12 justify-center" icon="content-save-all" mode="contained" onPress={showModal} buttonColor="#ff5f01">
                         Salvar
                         </Button>
                     </View>
