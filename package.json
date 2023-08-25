@@ -23,6 +23,7 @@
     "intl-pluralrules": "^2.0.1",
     "moment": "^2.29.4",
     "nativewind": "^2.0.11",
+    "querystring": "^0.2.1",
     "react": "18.2.0",
     "react-dom": "^18.2.0",
     "react-i18next": "^13.0.2",
