@@ -45,7 +45,9 @@ const CriarGrupo = () => {
     
             try{
                 const response = await axios.post(`${apiUrl}/api/grupos`, { nome: text, privado: isSwitchOn });
-                
+                let toast = Toast.show(response.data.message, {
+                    duration: Toast.durations.LONG,
+                  });
                 navigation.navigate('Grupos')
             }
             catch(error){
