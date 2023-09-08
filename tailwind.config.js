@@ -10,6 +10,7 @@ module.exports = {
     extend: {
       colors: {
         'ibiLaranja': '#ff5f01',
+        'ibiCinza' : '#6A6766'
       },
     },
     

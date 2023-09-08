@@ -20,6 +20,8 @@ import GruposCriar from './screens/CriarGrupo';
 import GruposGerenciar from './screens/GerenciarGrupo';
 import GruposEncontrar from './screens/EncontrarGrupo';
 import { PaperProvider } from 'react-native-paper';
+import { TransitionPresets } from '@react-navigation/native-stack';
+
 
 
 
@@ -40,7 +42,7 @@ export default function App() {
               headerStyle: { backgroundColor: '#ff5f01' }, // Defina a cor de fundo do cabeçalho
               headerTitleStyle: { color: 'white' },
               tabBarShowLabel: false,
-              
+              TransitionPresets,
             }}
           >
             <Tab.Screen name="Home" component={HomeScreen} 

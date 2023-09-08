@@ -1,3 +1,3 @@
-const apiUrl = "https://c286-191-53-92-44.ngrok-free.app";
+const apiUrl = "https://acc9-191-240-100-236.ngrok-free.app";
 
 export default apiUrl;
