@@ -6,13 +6,17 @@ import axios, { AxiosError } from 'axios';
 import {AsyncStorage} from 'react-native';
 import Toast from 'react-native-root-toast'
 import querystring from 'querystring';
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useFocusEffect } from '@react-navigation/native'
 import * as ImagePicker from 'expo-image-picker';
 
 
 
 
 const CriarGrupo = () => {
+
+
+
+    
 
     const [loading, setLoading] = useState(false); // Estado de carregamento
     const [text, setText] = useState("");
@@ -36,7 +40,7 @@ const CriarGrupo = () => {
       const pickImage = async () => {
         // No permissions request is necessary for launching the image library
         let result = await ImagePicker.launchImageLibraryAsync({
-          mediaTypes: ImagePicker.MediaTypeOptions.All,
+          mediaTypes: ImagePicker.MediaTypeOptions.Images,
           allowsEditing: true,
           aspect: [4, 3],
           quality: 1,
@@ -78,6 +82,8 @@ const CriarGrupo = () => {
                   });
                 }
 
+                // setLoading(true)
+
                 const response = await axios.post(`${apiUrl}/api/grupos`, formData, {
                     headers: {
                       'Content-Type': 'multipart/form-data',
@@ -113,6 +119,18 @@ const CriarGrupo = () => {
           </View>
         );
       }
+
+      useFocusEffect(
+        React.useCallback(() => {
+          // Your code here
+          setIsSwitchOn(false)
+          setImage(null)
+          setText('')
+          return () => {
+            // Clean up code here
+          };
+        }, [])
+      );
 
 
 
@@ -150,15 +168,18 @@ const CriarGrupo = () => {
                         <Text variant="titleMedium">Grupo privado</Text>
                         <Switch value={isSwitchOn} onValueChange={onToggleSwitch} color="#ff5f01" />
                     </View>
-                    <Button
-                        className="w-36 h-12 justify-center"
-                        icon="image"
-                        mode="contained"
-                        onPress={pickImage}
-                        buttonColor="#ff5f01"
-                        >
-                        {image ? image.name : "selecione uma imagem!"}
-                    </Button>
+                    <View className="items-center">
+                        <Button
+                            className="w-full h-12 justify-center"
+                            icon="image"
+                            mode="contained"
+                            onPress={pickImage}
+                            buttonColor="#ff5f01"
+                            >
+                            {image ? "OK" : "selecione uma imagem!"}
+                        </Button>
+                    </View>
+                    
                     {/* <ImageViewer
                         placeholderImageSource={PlaceholderImage}
                         selectedImage={image}
