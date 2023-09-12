@@ -5,7 +5,7 @@ import udd from '../assets/udd.jpg'
 import Grupo from '../components/Grupo'
 import apiUrl from '../config.js';
 import axios, { AxiosError } from 'axios';
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useFocusEffect } from '@react-navigation/native'
 import Toast from 'react-native-root-toast'
 
 
@@ -21,46 +21,57 @@ const GerenciarGrupo = () => {
 
 
 
-useEffect(() => {
-  // Faz a solicitação à API para obter os nomes
 
 
-  const fetchData = async () => {
-
-    try{
-      //   const token = await AsyncStorage.getItem('token');
-      //   if (token) {
-            const response = await axios.get(`${apiUrl}/api/usuario_grupos/1`);
-
-            if(response.status == 200){
-              setGrupos(response.data.data);
-            }
-            
-  
-             // Atualiza o estado com os nomes obtidos da API
-          // }
-          
-          
+  useFocusEffect(
+    React.useCallback(() => {
       
-    }
-    catch(error){
-        console.log(error)
-        let toast = Toast.show('Requisição não concluida!', {
-          duration: Toast.durations.LONG,
-        });
-    }
-    finally {
+
+
+      const fetchData = async () => {
+
+        setLoading(true)
+
+        try{
+          //   const token = await AsyncStorage.getItem('token');
+          //   if (token) {
+                const response = await axios.get(`${apiUrl}/api/usuario_grupos/1`);
+    
+                if(response.status == 200){
+                  setGrupos(response.data.data);
+                }
+                
       
-      setLoading(false); // Altera o estado de carregamento para false após a resposta da API
-    }
+                 // Atualiza o estado com os nomes obtidos da API
+              // }
+              
+              
+          
+        }
+        catch(error){
+            console.log(error)
+            let toast = Toast.show('Requisição não concluida!', {
+              duration: Toast.durations.LONG,
+            });
+        }
+        finally {
+          
+          setLoading(false); // Altera o estado de carregamento para false após a resposta da API
+        }
+        
+      }
     
-  }
+      
+        fetchData();
 
-  
-    fetchData();
+      return () => {
+        // Clean up code here
+      };
+    }, [])
+  );
 
-    
-}, []);
+
+
 
 if (loading) {
   // Exibe um indicador de carregamento enquanto espera a resposta da API

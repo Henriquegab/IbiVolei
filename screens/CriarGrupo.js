@@ -7,6 +7,7 @@ import {AsyncStorage} from 'react-native';
 import Toast from 'react-native-root-toast'
 import querystring from 'querystring';
 import { useNavigation } from '@react-navigation/native'
+import * as ImagePicker from 'expo-image-picker';
 
 
 
@@ -22,6 +23,7 @@ const CriarGrupo = () => {
     const [visible, setVisible] = useState(false);
     const containerStyle = {backgroundColor: 'white', padding: 20};
     const navigation = useNavigation();
+    const [image, setImage] = useState(null);
 
  
 
@@ -29,6 +31,24 @@ const CriarGrupo = () => {
         Keyboard.dismiss();
     };
 
+    
+
+      const pickImage = async () => {
+        // No permissions request is necessary for launching the image library
+        let result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.All,
+          allowsEditing: true,
+          aspect: [4, 3],
+          quality: 1,
+        });
+    
+        console.log(result);
+        
+    
+        if (!result.canceled) {
+          setImage(result.assets[0].uri);
+        }
+      };
     
 
     
@@ -44,7 +64,24 @@ const CriarGrupo = () => {
             
     
             try{
-                const response = await axios.post(`${apiUrl}/api/grupos`, { nome: text, privado: isSwitchOn });
+
+                const formData = new FormData();
+                formData.append('nome', text);
+                formData.append('privado', isSwitchOn);
+                
+                if (image) {
+                
+                  formData.append('imagem', {
+                    uri: image,
+                    type: 'image',
+                    name: 'imagem.jpg',
+                  });
+                }
+
+                const response = await axios.post(`${apiUrl}/api/grupos`, formData, {
+                    headers: {
+                      'Content-Type': 'multipart/form-data',
+                        },});
                 let toast = Toast.show(response.data.message, {
                     duration: Toast.durations.LONG,
                   });
@@ -111,8 +148,21 @@ const CriarGrupo = () => {
 
                     <View className="flex-row space-x-4">
                         <Text variant="titleMedium">Grupo privado</Text>
-                            <Switch value={isSwitchOn} onValueChange={onToggleSwitch} color="#ff5f01" />
+                        <Switch value={isSwitchOn} onValueChange={onToggleSwitch} color="#ff5f01" />
                     </View>
+                    <Button
+                        className="w-36 h-12 justify-center"
+                        icon="image"
+                        mode="contained"
+                        onPress={pickImage}
+                        buttonColor="#ff5f01"
+                        >
+                        {image ? image.name : "selecione uma imagem!"}
+                    </Button>
+                    {/* <ImageViewer
+                        placeholderImageSource={PlaceholderImage}
+                        selectedImage={image}
+                        /> */}
                     <Portal>
                         <Modal  className="px-2" visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
                             <Text>Tem certeza que quer criar um grupo com esse nome?</Text>

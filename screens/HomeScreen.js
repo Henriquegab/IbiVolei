@@ -1,6 +1,6 @@
 import { View, Text, Image, Pressable, TouchableOpacity, ScrollView, ActivityIndicator, StyleSheet, Platform  } from 'react-native'
 import React, { useLayoutEffect, useState, useEffect } from 'react'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useFocusEffect } from '@react-navigation/native'
 import { SafeAreaFrameContext, SafeAreaView } from 'react-native-safe-area-context';
 import { ChevronDownIcon, UserIcon, MagnifyingGlassIcon, AdjustmentsVerticalIcon, Cog6ToothIcon, PlusIcon } from "react-native-heroicons/outline";
 import Calendario from '../components/Calendario.js';
@@ -35,16 +35,20 @@ const HomeScreen = () => {
     }, []);
 
 
-    useEffect(() => {
-        // Faz a solicitação à API para obter os nomes
-  
-      
+    useFocusEffect(
+      React.useCallback(() => {
+        
+
+
         const fetchData = async () => {
+
+          setLoading(true)
   
           try{
             //   const token = await AsyncStorage.getItem('token');
             //   if (token) {
                   const response = await axios.get(`${apiUrl}/api/agendamento`);
+                  
 
                   
         
@@ -70,13 +74,27 @@ const HomeScreen = () => {
         
           fetchData();
 
-          
-      }, []);
+
+
+  
+        return () => {
+          // Clean up code here
+        };
+      }, [])
+    );
 
       const handleDiaSelecionado = (index) => {
         // Atualiza o estado com o índice do dia selecionado
         setDiaSelecionado(index);
       };
+
+      
+
+      const TelaAgendarQuadra = () => {
+        navigation.navigate('AgendarQuadra');
+      }
+
+      const containerStyle = Platform.OS === 'android' ? 'bg-[#ff5f01] pt-2 pb-5' : 'bg-[#ff5f01] pt-2';
 
       if (loading) {
         // Exibe um indicador de carregamento enquanto espera a resposta da API
@@ -86,13 +104,6 @@ const HomeScreen = () => {
           </View>
         );
       }
-
-      const TelaAgendarQuadra = () => {
-        navigation.navigate('AgendarQuadra');
-      }
-
-      const containerStyle = Platform.OS === 'android' ? 'bg-[#ff5f01] pt-2 pb-5' : 'bg-[#ff5f01] pt-2';
-
       
 
   return (
@@ -104,6 +115,8 @@ const HomeScreen = () => {
             {/* horarios */}
             
         </SafeAreaView>
+
+        
         
         {agendamentosSemana.length > 0 && diaSelecionado >= 0 && (
           // Renderiza os componentes de horários apenas se houver agendamentos e o dia selecionado for válido
