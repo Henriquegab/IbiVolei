@@ -4,6 +4,31 @@ import luis from '../assets/luis.png'
 import nicolas from '../assets/nicolas.jpg'
 
 const Grupo = ({ nome, totalJogos, criado, jogos, membros, imagem }) => {
+
+  let imagem_padrao = 'https://i.pinimg.com/originals/99/27/90/99279086833d4d0662c19f294035630b.jpg';
+
+  let mostrar_imagem = true;
+
+  if(imagem == null){
+    mostrar_imagem = false
+  }
+ 
+
+  const ImagemPadrao = () => {
+    return (
+      <Image className="w-16 h-16 rounded-full" src={imagem_padrao}></Image>
+    );
+  };
+
+  const ImagemNormal = () => {
+    return (
+      <Image className="w-16 h-16 rounded-full" src={imagem}></Image>
+    );
+  };
+
+
+
+
   return (
     
       
@@ -12,7 +37,11 @@ const Grupo = ({ nome, totalJogos, criado, jogos, membros, imagem }) => {
             
               {/* imagem */}
               <View className="w-16 h-16 rounded-full items-center justify-center pt-4 pl-6">
-                  <Image className="w-16 h-16 rounded-full" source={imagem ?? nicolas}></Image>
+                  
+
+                    {mostrar_imagem ? <ImagemNormal /> : <ImagemPadrao />}
+
+                  
               </View>
               {/* Quadrado de informações grande */}
               <View className=" w-64 h-32 ml-6 mt-4 justify-between pb-2">

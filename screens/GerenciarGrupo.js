@@ -6,6 +6,7 @@ import Grupo from '../components/Grupo'
 import apiUrl from '../config.js';
 import axios, { AxiosError } from 'axios';
 import { useNavigation } from '@react-navigation/native'
+import Toast from 'react-native-root-toast'
 
 
 
@@ -31,9 +32,12 @@ useEffect(() => {
       //   if (token) {
             const response = await axios.get(`${apiUrl}/api/usuario_grupos/1`);
 
+            if(response.status == 200){
+              setGrupos(response.data.data);
+            }
             
   
-            setGrupos(response.data.data); // Atualiza o estado com os nomes obtidos da API
+             // Atualiza o estado com os nomes obtidos da API
           // }
           
           
@@ -75,10 +79,12 @@ if (loading) {
         <View className="flex items-center pt-4 flex-col space-y-7">
             
           {grupos?.map((el) => {
+
+              
               
                return (
                 <View className="space-y-4">
-                  <Grupo key={el.id} nome={el.nome} totalJogos={658} criado={el.created_at} jogos="Sexta" membros={12} imagem={udd} />
+                  <Grupo key={el.id} nome={el.nome} totalJogos={658} criado={el.criado} jogos="Sexta" membros={12} imagem={el.link} />
                 </View>
                ) 
                
