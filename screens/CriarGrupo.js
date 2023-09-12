@@ -65,9 +65,11 @@ const CriarGrupo = () => {
         
             hideModal();
 
-            
+            // setLoading(true)
     
             try{
+
+
 
                 const formData = new FormData();
                 formData.append('nome', text);
@@ -82,7 +84,7 @@ const CriarGrupo = () => {
                   });
                 }
 
-                // setLoading(true)
+                
 
                 const response = await axios.post(`${apiUrl}/api/grupos`, formData, {
                     headers: {

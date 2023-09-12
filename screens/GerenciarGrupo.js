@@ -95,7 +95,7 @@ if (loading) {
               
                return (
                 <View className="space-y-4">
-                  <Grupo key={el.id} nome={el.nome} totalJogos={658} criado={el.criado} jogos="Sexta" membros={12} imagem={el.link} />
+                  <Grupo key={el.id} nome={el.nome} totalJogos={el.total_jogos} criado={el.criado} jogos="Sexta" membros={el.membros} imagem={el.link} />
                 </View>
                ) 
                
