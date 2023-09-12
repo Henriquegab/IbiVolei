@@ -60,7 +60,7 @@ const Grupos = () => {
                 <Image className="flex-1 w-full h-full" source={criarGrupo}></Image>
               </View>
             
-              <TouchableOpacity onPress={() => navigation.navigate('Criar Grupo')} className="flex-1 justify-end items-end pr-3 pb-3">
+              <TouchableOpacity onPress={() => navigation.navigate('Criar Grupo')} className="flex-1 justify-end items-end pr-3 pb-3 shadow-lg shadow-gray-700/90">
               
                 <Text className="text-white font-bold text-2xl text-center">Criar Grupo</Text>
               </TouchableOpacity>
