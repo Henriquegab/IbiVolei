@@ -2,8 +2,11 @@ import { View, Text, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
 import luis from '../assets/luis.png'
 import nicolas from '../assets/nicolas.jpg'
+import { useNavigation, useFocusEffect } from '@react-navigation/native'
 
-const Grupo = ({ nome, totalJogos, criado, jogos, membros, imagem }) => {
+const Grupo = ({ nome, totalJogos, criado, jogos, membros, imagem, id }) => {
+
+  const navigation = useNavigation();
 
   let imagem_padrao = 'https://i.pinimg.com/originals/99/27/90/99279086833d4d0662c19f294035630b.jpg';
 
@@ -26,13 +29,17 @@ const Grupo = ({ nome, totalJogos, criado, jogos, membros, imagem }) => {
     );
   };
 
+  const handlePress = () => {
+    navigation.navigate('Grupo Específico', { id: id })
+  }
+
 
 
 
   return (
     
       
-          <TouchableOpacity className="w-11/12 h-36  rounded-3xl bg-ibiLaranja opacity-80 flex-row flex-wrap shadow-lg shadow-gray-700/90">
+          <TouchableOpacity className="w-11/12 h-36  rounded-3xl bg-ibiLaranja opacity-80 flex-row flex-wrap shadow-lg shadow-gray-700/90" onPress={handlePress}>
             
             
               {/* imagem */}

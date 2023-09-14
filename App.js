@@ -19,6 +19,7 @@ import { RootSiblingParent } from 'react-native-root-siblings';
 import GruposCriar from './screens/CriarGrupo';
 import GruposGerenciar from './screens/GerenciarGrupo';
 import GruposEncontrar from './screens/EncontrarGrupo';
+import GruposEspecifico from './screens/GrupoEspecifico';
 import { PaperProvider } from 'react-native-paper';
 import { TransitionPresets } from '@react-navigation/native-stack';
 
@@ -100,6 +101,13 @@ export default function App() {
               <Tab.Screen
               name="Encontrar Grupos"
               component={GruposEncontrar}
+              options={{
+                tabBarButton: () => null, // Isso faz com que a tela seja invisível no tab bar
+              }}
+              />
+              <Tab.Screen
+              name="Grupo Específico"
+              component={GruposEspecifico}
               options={{
                 tabBarButton: () => null, // Isso faz com que a tela seja invisível no tab bar
               }}

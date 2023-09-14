@@ -1,44 +1,46 @@
 import { View, Text, TouchableOpacity, ScrollView, Image, ActivityIndicator } from 'react-native'
-import React, {useLayoutEffect, useEffect, useState} from 'react'
-import luis from '../assets/luis.png'
-import udd from '../assets/udd.jpg'
-import Grupo from '../components/Grupo'
+import React, {useLayoutEffect, useEffect, useState} from 'react';
 import apiUrl from '../config.js';
+import Toast from 'react-native-root-toast';
 import axios, { AxiosError } from 'axios';
 import { useNavigation, useFocusEffect } from '@react-navigation/native'
-import Toast from 'react-native-root-toast'
 
+const GrupoEspecifico = ({ route }) => {
 
+    const { id } = route.params;
 
+    
 
-const GerenciarGrupo = () => {
+    
 
-  const navigation = useNavigation();
-
-  const [grupos, setGrupos] = useState([]);
+    const [grupo, setGrupo] = useState([]);
 
   const [loading, setLoading] = useState(true); // Estado de carregamento
 
 
-
+  useEffect(() => {
+    setGrupo(null);
+  }, [id]);
 
 
   useFocusEffect(
     React.useCallback(() => {
       
-
+        
 
       const fetchData = async () => {
 
         setLoading(true)
+        setGrupo(null);
+        alert(id)
 
         try{
           //   const token = await AsyncStorage.getItem('token');
           //   if (token) {
-                const response = await axios.get(`${apiUrl}/api/usuario_grupos/1`);
+                const response = await axios.get(`${apiUrl}/api/grupos/${id}`);
     
                 if(response.status == 200){
-                  setGrupos(response.data.data);
+                  setGrupo(response.data.data);
                 }
                 
       
@@ -82,35 +84,11 @@ if (loading) {
   );
 }
 
-
-
   return (
-    <View className="flex-1">
-      <ScrollView>
-        <View className="flex items-center pt-4 flex-col space-y-7">
-            
-          {grupos?.map((el) => {
-
-              
-              
-               return (
-                <View className="space-y-4">
-                  <Grupo key={el.id} id={el.id} nome={el.nome + el.id} totalJogos={el.total_jogos} criado={el.criado} jogos="Sexta" membros={el.membros} imagem={el.link} onPress={() => navigation.navigate('Grupo Específico')}/>
-                </View>
-               ) 
-               
-               
-                
-              
-          })}
-          
-          
-            
-        </View>
-      </ScrollView>
-        
+    <View>
+      <Text>GrupoEspecifico + {grupo.nome} + {id}</Text>
     </View>
   )
 }
 
-export default GerenciarGrupo
+export default GrupoEspecifico
