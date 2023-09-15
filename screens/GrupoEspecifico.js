@@ -60,8 +60,23 @@ if (loading) {
 }
 
   return (
-    <View>
-      <Text>GrupoEspecifico + {grupo.nome}</Text>
+    <View className="border-2 flex-1">
+      {/* <Text>GrupoEspecifico + {grupo.nome}</Text> */}
+      {/* Header */}
+      <View className="border-2 h-64 items-center">
+        <View className="border-2 w-32 h-32 rounded-full overflow-hidden mt-4">
+          <Image className="w-32 h-32" src={grupo.link}></Image>
+        </View>
+        <TouchableOpacity className="border-2 w-20 h-8 rounded-full absolute mt-32 items-center justify-center bg-white">
+          <Text className="font-semibold text-ibiLaranja">Editar</Text>
+        </TouchableOpacity>
+
+        <View className="border-2 absolute mt-44 w-5/6 h-14 items-center justify-start">
+            <Text className="text-black font-semibold text-3xl">{grupo.nome}</Text>
+        </View>
+
+      </View>
+      
     </View>
   )
 }

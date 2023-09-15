@@ -95,7 +95,7 @@ if (loading) {
               
                return (
                 <View className="space-y-4">
-                  <Grupo key={el.id} id={el.id} nome={el.nome + el.id} totalJogos={el.total_jogos} criado={el.criado} jogos="Sexta" membros={el.membros} imagem={el.link} onPress={() => navigation.navigate('Grupo Específico')}/>
+                  <Grupo key={el.id} id={el.id} nome={el.nome} totalJogos={el.total_jogos} criado={el.criado} jogos="Sexta" membros={el.membros} imagem={el.link} onPress={() => navigation.navigate('Grupo Específico')}/>
                 </View>
                ) 
                
