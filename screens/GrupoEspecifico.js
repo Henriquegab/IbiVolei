@@ -23,54 +23,29 @@ const GrupoEspecifico = ({ route }) => {
   }, [id]);
 
 
-  useFocusEffect(
-    React.useCallback(() => {
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
       
-        
-
-      const fetchData = async () => {
-
-        setLoading(true)
-        setGrupo(null);
-        alert(id)
-
-        try{
-          //   const token = await AsyncStorage.getItem('token');
-          //   if (token) {
-                const response = await axios.get(`${apiUrl}/api/grupos/${id}`);
-    
-                if(response.status == 200){
-                  setGrupo(response.data.data);
-                }
-                
-      
-                 // Atualiza o estado com os nomes obtidos da API
-              // }
-              
-              
-          
+  
+      try {
+        const response = await axios.get(`${apiUrl}/api/grupos/${id}`);
+  
+        if (response.status === 200) {
+          setGrupo(response.data.data);
         }
-        catch(error){
-            console.log(error)
-            let toast = Toast.show('Requisição não concluida!', {
-              duration: Toast.durations.LONG,
-            });
-        }
-        finally {
-          
-          setLoading(false); // Altera o estado de carregamento para false após a resposta da API
-        }
-        
+      } catch (error) {
+        console.log(error);
+        let toast = Toast.show('Requisição não concluída!', {
+          duration: Toast.durations.LONG,
+        });
+      } finally {
+        setLoading(false);
       }
-    
-      
-        fetchData();
-
-      return () => {
-        // Clean up code here
-      };
-    }, [])
-  );
+    };
+  
+    fetchData();
+  }, [id]);
 
 
 
@@ -86,7 +61,7 @@ if (loading) {
 
   return (
     <View>
-      <Text>GrupoEspecifico + {grupo.nome} + {id}</Text>
+      <Text>GrupoEspecifico + {grupo.nome}</Text>
     </View>
   )
 }

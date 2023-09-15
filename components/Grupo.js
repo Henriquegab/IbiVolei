@@ -29,8 +29,8 @@ const Grupo = ({ nome, totalJogos, criado, jogos, membros, imagem, id }) => {
     );
   };
 
-  const handlePress = () => {
-    navigation.navigate('Grupo Específico', { id: id })
+  const handlePress = (groupId) => {
+    navigation.navigate('Grupo Específico', { id: groupId })
   }
 
 
@@ -39,7 +39,7 @@ const Grupo = ({ nome, totalJogos, criado, jogos, membros, imagem, id }) => {
   return (
     
       
-          <TouchableOpacity className="w-11/12 h-36  rounded-3xl bg-ibiLaranja opacity-80 flex-row flex-wrap shadow-lg shadow-gray-700/90" onPress={handlePress}>
+          <TouchableOpacity className="w-11/12 h-36  rounded-3xl bg-ibiLaranja opacity-80 flex-row flex-wrap shadow-lg shadow-gray-700/90" onPress={() => handlePress(id)}>
             
             
               {/* imagem */}
