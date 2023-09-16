@@ -60,24 +60,39 @@ if (loading) {
 }
 
   return (
-    <View className="border-2 flex-1">
+    <ScrollView className="flex-1 bg-white">
       {/* <Text>GrupoEspecifico + {grupo.nome}</Text> */}
       {/* Header */}
-      <View className="border-2 h-64 items-center">
-        <View className="border-2 w-32 h-32 rounded-full overflow-hidden mt-4">
+      <View className="h-96 items-center bg-ibiLaranja shadow-lg shadow-gray-700/90">
+        <View className="w-32 h-32 rounded-full overflow-hidden mt-4 border-white border shadow-lg shadow-gray-700/90">
           <Image className="w-32 h-32" src={grupo.link}></Image>
         </View>
-        <TouchableOpacity className="border-2 w-20 h-8 rounded-full absolute mt-32 items-center justify-center bg-white">
+        <TouchableOpacity className="w-20 h-8 rounded-full absolute mt-32 items-center justify-center bg-white shadow-lg shadow-gray-700/90">
           <Text className="font-semibold text-ibiLaranja">Editar</Text>
         </TouchableOpacity>
 
-        <View className="border-2 absolute mt-44 w-5/6 h-14 items-center justify-start">
-            <Text className="text-black font-semibold text-3xl">{grupo.nome}</Text>
+        <View className="absolute mt-44 w-5/6 h-28 items-center justify-start bg-ibiLaranja rounded-lg border-2 border-white shadow-lg shadow-gray-700/90">
+            <Text className="text-white font-semibold text-3xl pb-3">{grupo.nome}</Text>
+            <View className="w-full h-12 flex-row">
+                <View className="w-1/3 h-full items-center justify-between">
+                  <Text className="text-white font-normal text-md">Membros</Text>
+                  <Text className="text-white font-semibold text-md">{grupo.membros}</Text>
+                </View>
+                <View className="w-1/3 h-full items-center justify-between">
+                  <Text className="text-white font-normal text-md">Total de jogos</Text>
+                  <Text className="text-white font-semibold text-md">{grupo.total_jogos}</Text>
+                </View>
+                <View className="w-1/3 h-full items-center justify-between">
+                  <Text className="text-white font-normal text-md">Criado em</Text>
+                  <Text className="text-white font-semibold text-md">{grupo.criado}</Text>
+                </View>
+            </View>
         </View>
+        
 
       </View>
       
-    </View>
+    </ScrollView>
   )
 }
 

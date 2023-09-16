@@ -55,7 +55,7 @@ const Grupos = () => {
         </SafeAreaView>
         <ScrollView>
           <View className="flex-1 flex-col px-4 pt-5">
-            <View className="flex rounded-xl bg-ibiLaranja my-4 w-auto h-40 justify-center content-center">
+            <View className="flex rounded-xl bg-ibiLaranja my-4 w-auto h-40 justify-center content-center shadow-lg shadow-gray-700/90">
               <View className="absolute w-52 h-40 justify-end items-center">
                 <Image className="flex-1 w-full h-full" source={criarGrupo}></Image>
               </View>
@@ -65,7 +65,7 @@ const Grupos = () => {
                 <Text className="text-white font-bold text-2xl text-center">Criar Grupo</Text>
               </TouchableOpacity>
             </View>
-            <View className="flex rounded-xl bg-ibiLaranja my-4 w-auto h-40 justify-center content-center ">
+            <View className="flex rounded-xl bg-ibiLaranja my-4 w-auto h-40 justify-center content-center shadow-lg shadow-gray-700/90">
                 <View className=" absolute w-52 h-40 justify-end items-center">
                   <Image className="flex-1 w-full h-full" source={criarGrupo}></Image>
                 </View>
@@ -73,7 +73,7 @@ const Grupos = () => {
                 <Text className="text-white font-bold text-2xl text-center">Gerenciar seus Grupos</Text>
               </TouchableOpacity>
             </View>
-            <View className="flex rounded-xl bg-ibiLaranja my-4 w-auto h-40 justify-center content-center ">
+            <View className="flex rounded-xl bg-ibiLaranja my-4 w-auto h-40 justify-center content-center shadow-lg shadow-gray-700/90">
                 <View className=" absolute w-52 h-40 justify-end items-center">
                   <Image className="flex-1 w-full h-full" source={criarGrupo}></Image>
                 </View>

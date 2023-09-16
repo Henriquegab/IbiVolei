@@ -1,6 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import HomeScreen from './screens/HomeScreen';
 import AgendarQuadra from './screens/AgendarQuadra';
 import Grupos from './screens/Grupos';
@@ -94,9 +94,14 @@ export default function App() {
               <Tab.Screen
               name="Gerenciar Grupos"
               component={GruposGerenciar}
-              options={{
+              options={({ navigation }) => ({
                 tabBarButton: () => null, // Isso faz com que a tela seja invisível no tab bar
-              }}
+                headerLeft: () => (
+                  <TouchableOpacity onPress={() => navigation.navigate('Grupos')}>
+                    <Text className="pl-3 text-white font-bold">Voltar</Text>
+                  </TouchableOpacity>
+                ),
+              })}
               />
               <Tab.Screen
               name="Encontrar Grupos"
@@ -108,9 +113,14 @@ export default function App() {
               <Tab.Screen
               name="Grupo Específico"
               component={GruposEspecifico}
-              options={{
+              options={({ navigation }) => ({
                 tabBarButton: () => null, // Isso faz com que a tela seja invisível no tab bar
-              }}
+                headerLeft: () => (
+                  <TouchableOpacity onPress={() => navigation.navigate('Gerenciar Grupos')}>
+                    <Text className="pl-3 text-white font-bold">Voltar</Text>
+                  </TouchableOpacity>
+                ),
+              })}
               />
             
             
